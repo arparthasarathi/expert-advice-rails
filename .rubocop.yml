@@ -1,0 +1,42 @@
+inherit_from: .rubocop_todo.yml
+
+Style/FrozenStringLiteralComment:
+  Enabled: false
+
+Naming/VariableNumber:
+  Enabled: false
+
+Performance/FixedSize:
+  Enabled: false
+
+Lint/AmbiguousBlockAssociation:
+  Enabled: false
+
+Metrics/ParameterLists:
+  Enabled: false
+
+Metrics/AbcSize:
+  Max: 60
+
+Metrics/ClassLength:
+  Max: 1200
+
+Metrics/MethodLength:
+  Max: 200
+
+Metrics/ModuleLength:
+  Max: 300
+
+Metrics/CyclomaticComplexity:
+  Max: 8
+
+Metrics/PerceivedComplexity:
+  Max: 8
+
+AllCops:
+  Exclude:
+    - spec/**/*
+    - db/schema.rb
+    - db/*
+    - db/migrate/*
+    - config/**
