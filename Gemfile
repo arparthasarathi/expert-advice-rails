@@ -19,9 +19,9 @@ gem 'doorkeeper'
 gem 'rack-cors'
 gem 'active_model_serializers'
 gem 'validates_email_format_of'
+gem 'api-pagination'
 
 group :development, :test do
-  gem 'rubocop'
   gem 'pry'
   gem 'rspec-rails'
   gem 'rubocop'
