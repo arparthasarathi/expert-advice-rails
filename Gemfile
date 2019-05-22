@@ -20,6 +20,7 @@ gem 'rack-cors'
 gem 'active_model_serializers'
 gem 'validates_email_format_of'
 gem 'api-pagination'
+gem 'kaminari'
 
 # for tagging the posts with user generated tags
 gem 'acts-as-taggable-on'
