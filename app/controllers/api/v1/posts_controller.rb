@@ -56,6 +56,21 @@ module Api
       end
 
       def destroy
+        post = current_user.posts.find_by(slug: params[:slug])
+
+        if post.present?
+          if post.destroy
+            render json: nil, status: :ok, account_user: current_account_user
+          else
+            render json: post, account_user: current_account_user,
+                   status: :unprocessable_entity,
+                   serializer: ActiveModel::Serializer::ErrorSerializer
+          end
+        else
+          render json: post, account_user: current_account_user,
+                 status: :forbidden,
+                 serializer: ActiveModel::Serializer::ErrorSerializer
+        end
       end
 
       private
