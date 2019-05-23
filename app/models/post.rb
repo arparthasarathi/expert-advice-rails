@@ -13,4 +13,14 @@ class Post < ApplicationRecord
   def to_param
     slug
   end
+
+  ## Assigns the passed param to the account_id attribute of a
+  #  post instance
+  #
+  #  @param [Integer] account_id existing account_id present in database
+  #
+  #  @return [nil]
+  def set_account(account_id)
+    self.account_id = account_id
+  end
 end
