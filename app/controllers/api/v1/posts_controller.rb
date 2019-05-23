@@ -12,6 +12,10 @@ module Api
       def show
         post = Post.find_by(slug: params[:slug])
 
+        if post.is_question?
+          post.increment_views_count
+        end
+
         render json: post, include: ['tags', 'answers']
       end
 
