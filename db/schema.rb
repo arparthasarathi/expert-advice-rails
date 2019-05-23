@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_10_06_115556) do
+ActiveRecord::Schema.define(version: 2019_05_22_185852) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -61,6 +61,20 @@ ActiveRecord::Schema.define(version: 2018_10_06_115556) do
     t.index ["uid"], name: "index_oauth_applications_on_uid", unique: true
   end
 
+  create_table "posts", force: :cascade do |t|
+    t.string "title"
+    t.string "slug"
+    t.text "body"
+    t.bigint "user_id", null: false
+    t.bigint "account_id", null: false
+    t.integer "question_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer "views_count", default: 0
+    t.index ["account_id"], name: "index_posts_on_account_id"
+    t.index ["user_id"], name: "index_posts_on_user_id"
+  end
+
   create_table "user_account_accesses", force: :cascade do |t|
     t.bigint "user_id"
     t.bigint "account_id"
@@ -82,6 +96,8 @@ ActiveRecord::Schema.define(version: 2018_10_06_115556) do
   add_foreign_key "oauth_access_grants", "oauth_applications", column: "application_id"
   add_foreign_key "oauth_access_grants", "users", column: "resource_owner_id"
   add_foreign_key "oauth_access_tokens", "oauth_applications", column: "application_id"
+  add_foreign_key "posts", "accounts"
+  add_foreign_key "posts", "users"
   add_foreign_key "user_account_accesses", "accounts"
   add_foreign_key "user_account_accesses", "users"
 end
