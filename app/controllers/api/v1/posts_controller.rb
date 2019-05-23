@@ -12,6 +12,11 @@ module Api
       def show
         post = Post.find_by(slug: params[:slug])
 
+        if post.blank?
+          render json: post, status: :not_found,
+                 serializer: ActiveModel::Serializer::ErrorSerializer
+        end
+
         if post.is_question?
           post.increment_views_count
         end
