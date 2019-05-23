@@ -21,6 +21,9 @@ gem 'active_model_serializers'
 gem 'validates_email_format_of'
 gem 'api-pagination'
 
+# acts_as_url for slug based URLs
+gem 'stringex'
+
 group :development, :test do
   gem 'pry'
   gem 'rspec-rails'
