@@ -23,4 +23,19 @@ class Post < ApplicationRecord
   def set_account(account_id)
     self.account_id = account_id
   end
+
+  ## Increment the views count by 1 for a post instance
+  #
+  #  @return [nil]
+  def increment_views_count
+    self.views_count = self.views_count + 1
+    self.save
+  end
+
+  ## Check and return boolean if the post instance is a question or an answer
+  #
+  #  @return [boolean]
+  def is_question?
+    self.question_id.present?
+  end
 end
