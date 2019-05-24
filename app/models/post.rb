@@ -5,7 +5,7 @@ class Post < ApplicationRecord
   belongs_to :user
   belongs_to :account
   belongs_to :question, foreign_key: 'question_id', class_name: 'Post', optional: true
-  has_many :answers, foreign_key: 'question_id', class_name: 'Post'
+  has_many :answers, foreign_key: 'question_id', class_name: 'Post', dependent: :delete_all
 
   ## Function to override the default id param to slug
   #
@@ -20,7 +20,7 @@ class Post < ApplicationRecord
   #  @param [Integer] account_id existing account_id present in database
   #
   #  @return [nil]
-  def set_account(account_id)
+  def assign_account(account_id)
     self.account_id = account_id
   end
 
@@ -28,14 +28,16 @@ class Post < ApplicationRecord
   #
   #  @return [nil]
   def increment_views_count
-    self.views_count = self.views_count + 1
-    self.save
+    views_count = self.views_count + 1
+    update(views_count: views_count)
   end
 
   ## Check and return boolean if the post instance is a question or an answer
+  #  question_id will be always be nil for the questions and integer will be
+  #  present for the answers
   #
   #  @return [boolean]
-  def is_question?
-    self.question_id.present?
+  def question?
+    question_id.nil?
   end
 end
