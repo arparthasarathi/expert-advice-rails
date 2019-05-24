@@ -28,6 +28,9 @@ gem 'acts-as-taggable-on'
 # acts_as_url for slug based URLs
 gem 'stringex'
 
+# populate the application with fake data
+gem 'faker'
+
 group :development, :test do
   gem 'pry'
   gem 'rspec-rails'
