@@ -44,10 +44,11 @@ module Api
       end
 
       def update
+        update_post_params_with_edited_at = update_post_params.merge(:edited_at => Time.now)
         post = current_user.posts.find_by(slug: params[:slug])
 
         if post.present?
-          post.assign_attributes(update_post_params)
+          post.assign_attributes(update_post_params_with_edited_at)
           if post.save
             render json: post, status: :ok, include: ['tags']
           else
@@ -87,7 +88,7 @@ module Api
       end
 
       def update_post_params
-        params.require(:data).require(:attributes).permit(:id, :title, :body, :question_id, :tag_list)
+        params.require(:data).require(:attributes).permit(:id, :title, :body, :question_id, :tag_list, :edited_at)
       end
     end
   end
