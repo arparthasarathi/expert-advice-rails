@@ -4,7 +4,7 @@ module Api
       before_action :doorkeeper_authorize!, except: %i[create index search show]
 
       def index
-        posts = Post.where(question_id: nil).order(:created_at)
+        posts = Post.where(question_id: nil).order(created_at: :desc)
 
         paginate json: posts, include: ['tags']
       end
@@ -17,27 +17,25 @@ module Api
                  serializer: ActiveModel::Serializer::ErrorSerializer
         end
 
-        if post.is_question?
-          post.increment_views_count
-        end
+        post.increment_views_count if post.question?
 
-        render json: post, include: ['tags', 'answers']
+        render json: post, include: %w[tags answers]
       end
 
       def search
-        term = params[:term]
-        posts = Post.tagged_with(term)
+        term = params[:query]
+        posts = Post.tagged_with(term).order(created_at: :desc)
 
-        paginate json: posts
+        paginate json: posts, include: ['tags']
       end
 
       def create
         post = current_user.posts.build(create_post_params)
 
-        post.set_account(current_account.id)
+        post.assign_account(current_account.id)
 
         if post.save
-          render json: post, account_user: current_account_user
+          render json: post, include: %w[tags question]
         else
           render json: post,
                  status: :unprocessable_entity,
@@ -51,7 +49,7 @@ module Api
         if post.present?
           post.assign_attributes(update_post_params)
           if post.save
-            render json: post, status: :ok, account_user: current_account_user
+            render json: post, status: :ok, include: ['tags']
           else
             render json: post,
                    status: :unprocessable_entity,
