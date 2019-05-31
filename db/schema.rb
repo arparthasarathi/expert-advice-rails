@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_05_25_080816) do
+ActiveRecord::Schema.define(version: 2019_05_31_032220) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -76,6 +76,7 @@ ActiveRecord::Schema.define(version: 2019_05_25_080816) do
     t.datetime "edited_at", default: -> { "CURRENT_TIMESTAMP" }
 >>>>>>> develop
     t.index ["account_id"], name: "index_posts_on_account_id"
+    t.index ["slug"], name: "index_posts_on_slug", unique: true
     t.index ["user_id"], name: "index_posts_on_user_id"
   end
 
