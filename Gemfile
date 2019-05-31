@@ -29,7 +29,7 @@ gem 'acts-as-taggable-on'
 gem 'stringex'
 
 # populate the application with fake data
-gem 'faker'
+gem 'faker
 
 group :development, :test do
   gem 'pry'
