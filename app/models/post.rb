@@ -28,8 +28,8 @@ class Post < ApplicationRecord
   #
   #  @return [nil]
   def increment_views_count
-    self.increment(:views_count)
-    self.save
+    increment(:views_count)
+    save
   end
 
   ## Check and return boolean if the post instance is a question or an answer
