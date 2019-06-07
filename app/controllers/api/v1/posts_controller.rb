@@ -44,7 +44,7 @@ module Api
       end
 
       def update
-        update_post_params_with_edited_at = update_post_params.merge(:edited_at => Time.now)
+        update_post_params_with_edited_at = update_post_params.merge(edited_at: Time.now)
         post = current_user.posts.find_by(slug: params[:slug])
 
         if post.present?
