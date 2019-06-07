@@ -71,10 +71,7 @@ ActiveRecord::Schema.define(version: 2019_05_31_032220) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "views_count", default: 0
-<<<<<<< HEAD
-=======
     t.datetime "edited_at", default: -> { "CURRENT_TIMESTAMP" }
->>>>>>> develop
     t.index ["account_id"], name: "index_posts_on_account_id"
     t.index ["slug"], name: "index_posts_on_slug", unique: true
     t.index ["user_id"], name: "index_posts_on_user_id"
