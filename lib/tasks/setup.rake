@@ -3,4 +3,3 @@ task setup: %w[
   users:build
   posts:build
 ]
-
